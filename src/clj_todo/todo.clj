@@ -29,11 +29,11 @@ This is an ugly way to generate the first ten numbers.
   "Annotates a form with a comment for later review.
   Adds the comment and the form to the batch of todos, which
   can be revied later using todo-summary."
-  [comment form] 
-  (do 
-    (save-code-and-snippet comment (str form)) 
-    form))
-
+  [comment & more] 
+  (do
+    (save-code-and-snippet comment (apply str more)) 
+    `(do ~@more)))
+  
 (defn clear-todos
   "Clears the todo log."
   []

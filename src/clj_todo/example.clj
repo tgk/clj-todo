@@ -27,15 +27,12 @@
    (todo-summary
     (main-program))))
 
-(todo
- "Another goal is to make a lein lib so that 
-  lein todos
-prints the todos from a project"
- nil)
+(todo 
+ "An example with several functions"
+ (defn f [x] (* 2 x))
+ (defn g [x] (f x)))
 
-(todo
- "Also, would it be interesting to have a form of todos
-that do not require a form? For general thoughts."
- nil)
+(println (f 10))
+(println (g 10))
 
 (todo-summary)

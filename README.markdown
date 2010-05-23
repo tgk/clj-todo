@@ -2,11 +2,7 @@
 
 The `clj-todo` lib is designed for easily annotating Clojure programs with todo items.
 The lib generates a todo summary which includes code fragments to make it easy to extract all todos without having to read trough the entire source code.
-As Clojure code (idiomatically) is written as small atomic components, these reports should be perfect for reviewing.
-
-As of now the lib is very limited.
-It will hopefully be expanded
-
+As Clojure code (idiomatically) is written as small atomic components these reports should be perfect for code reviews.
 
 ## Example usage
 
@@ -46,5 +42,4 @@ I don't like how this function works at all. It could be O(1).
 ## TODOs (on the lib)
 
 * Create a lein plugin, such that `lein todo` runs trough a project and prints the todo summary.
-* Create the possibility of easily making todos without any associated pice of code.
 * Right now, forms are reformatted before printing. This might not be desirable. Should the lib use pprint or is it possible to save the formatting?

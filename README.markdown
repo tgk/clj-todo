@@ -43,3 +43,4 @@ I don't like how this function works at all. It could be O(1).
 
 * Create a lein plugin, such that `lein todo` runs trough a project and prints the todo summary.
 * Right now, forms are reformatted before printing. This might not be desirable. Should the lib use pprint or is it possible to save the formatting?
+* Namespace specific todo-logs

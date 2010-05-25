@@ -1,12 +1,14 @@
-(ns #^{:author "Thomas G. Kristensen"
+(ns 
+    #^{:author "Thomas G. Kristensen"
        :doc "Libary for adding todo statements to a clojure program.
 
 Wrap any form in a todo to add a reminder to revisit the code later.
 
-(defn gimme-ten []
-  (todo
-   \"This is an ugly way to generate the first ten numbers.\"
-   (take 10 (iterate inc 1))))
+(todo
+ \"I don't like how this function works at all. It could be O(1).\"
+ (defn range-sum 
+   [n]
+   (reduce + (range n))))
 
 To review the annotations use the todo-summary function.
 
@@ -14,9 +16,10 @@ To review the annotations use the todo-summary function.
 
 Summary of todos:
 
-This is an ugly way to generate the first ten numbers.
-(take 10 (iterate inc 1)))"}
-  clj-todo.todo)
+I don't like how this function works at all. It could be O(1).
+(defn range-sum [n] (reduce + (range n)))"}
+  clj-todo.todo 
+  (:use clojure.contrib.pprint))
 
 (def *todo-log* (atom []))
 
@@ -29,11 +32,14 @@ This is an ugly way to generate the first ten numbers.
   "Annotates a form with a comment for later review.
   Adds the comment and the form to the batch of todos, which
   can be revied later using todo-summary."
-  [comment & more] 
+  [comment body] 
   (do
-    (save-code-and-snippet comment (apply str more)) 
-    `(do ~@more)))
-  
+    (save-code-and-snippet 
+     comment 
+     (with-out-str
+       (with-pprint-dispatch *code-dispatch* (pprint body))))
+    body))
+
 (defn clear-todos
   "Clears the todo log."
   []
@@ -46,8 +52,5 @@ This is an ugly way to generate the first ten numbers.
   (println)
   (doall
    (map (fn [[comment code-str]] 
-	  (do
-	    (println comment)
-	    (println code-str)
-	    (println)))
+	  (do (println comment) (println code-str)))
 	@*todo-log*)))

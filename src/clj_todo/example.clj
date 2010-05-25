@@ -1,10 +1,6 @@
 (ns clj-todo.example
   (:use clj-todo.todo))
 
-(clear-todos)
-
-(map #(todo "Bad function!" (inc %)) (range 10))
-
 (defn lousy-function
   [param-1 param-2]
   (do
@@ -20,19 +16,5 @@
  (defn range-sum 
    [n]
    (reduce + (range n))))
-
-(todo
- "A goal is to make it possible to write something like this:"
- (comment
-   (todo-summary
-    (main-program))))
-
-(todo 
- "An example with several functions"
- (defn f [x] (* 2 x))
- (defn g [x] (f x)))
-
-(println (f 10))
-(println (g 10))
 
 (todo-summary)

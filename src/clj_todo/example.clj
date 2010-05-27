@@ -16,5 +16,3 @@
  (defn range-sum 
    [n]
    (reduce + (range n))))
-
-(todo-summary)

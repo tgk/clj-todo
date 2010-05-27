@@ -26,7 +26,7 @@ Here is an example of some code, using the todo macro.
    (reduce + (range n))))
 </pre>
 
-To get a summary of the todos, call `todo-summary`.
+To get a summary of the todos, either call `todo-summary` within the project (only works if it isn't pre-compiled) or simply use `lein todo`.
 
 <pre>
 Summary of todos:
@@ -39,7 +39,3 @@ I don't like how this function works at all. It could be O(1).
 </pre>
 
 
-## TODOs (on the lib)
-
-* Create a lein plugin, such that `lein todo` runs trough a project and prints the todo summary.
-* Is it possible to make namespace specific todo-logs, to avoid clutter with other peoples todo annotated projects.

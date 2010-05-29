@@ -38,4 +38,4 @@ I don't like how this function works at all. It could be O(1).
 (defn range-sum [n] (reduce + (range n)))
 </pre>
 
-
+At the moment, running `lein todo` will remove all compiled files as the program has to expand macros to build the todo log.

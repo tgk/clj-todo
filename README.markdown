@@ -39,3 +39,6 @@ I don't like how this function works at all. It could be O(1).
 </pre>
 
 At the moment, running `lein todo` will remove all compiled files as the program has to expand macros to build the todo log.
+
+If `:todo-log` is given in `project.clj`, todos will also be written to that file.
+See `project.clj` for an example of this.

@@ -32,7 +32,8 @@ Summary of todos:
 I don't like how this function works at all. It could be O(1).
 (defn range-sum [n] (reduce + (range n)))"}
   clj-todo.todo 
-  (:use clojure.contrib.pprint))
+  (:use clojure.contrib.pprint)
+  (:use [clojure.contrib.duck-streams :only (spit)]))
 
 (def *todo-log* (atom []))
 
@@ -58,7 +59,26 @@ I don't like how this function works at all. It could be O(1).
   []
   (swap! *todo-log* (fn [& more] [])))
 
+(defn todo-summary-str
+  "Returns a summary of the todos in the project"
+  []
+  (apply 
+   str "Summary of todos:\n\n"
+   (map (fn [[comment code-str]] 
+	  (str comment "\n" code-str "\n"))
+	@*todo-log*)))
+
 (defn todo-summary
+  "Prints a summary of the todos in the project."
+  []
+  (println (todo-summary-str)))
+
+(defn todo-summary-file
+  "Writes a summary log to a file."
+  [filename]
+  (spit filename (todo-summary-str)))
+
+(comment defn todo-summary
   "Prints a summary of the todos in the project."
   []
   (println "Summary of todos:")
@@ -67,3 +87,4 @@ I don't like how this function works at all. It could be O(1).
    (map (fn [[comment code-str]] 
 	  (do (println comment) (println code-str)))
 	@*todo-log*)))
+

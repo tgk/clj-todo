@@ -27,6 +27,8 @@ Here is an example of some code, using the todo macro.
 </pre>
 
 To get a summary of the todos, either call `todo-summary` within the project (only works if it isn't pre-compiled) or simply use `lein todo`.
+If `lein todo` is given a list of namespaces it will print the todos of these. 
+If none is given it will use all namespaces in the project.
 
 <pre>
 Summary of todos:

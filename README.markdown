@@ -44,3 +44,6 @@ At the moment, running `lein todo` will remove all compiled files as the program
 
 If `:todo-log` is given in `project.clj`, todos will also be written to that file.
 See `project.clj` for an example of this.
+
+The clj-todo module can easily be accessed in lein using clojars.
+See the `project.clj` file in [the alijn project](http://github.com/tgk/alijn) for a usage example.

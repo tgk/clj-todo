@@ -1,5 +1,5 @@
 (ns clj-todo.example
-  (:use clj-todo.todo))
+  (:use clj-todo))
 
 (defn lousy-function
   [param-1 param-2]

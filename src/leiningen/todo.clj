@@ -1,7 +1,8 @@
 (ns leiningen.todo
-  (:use [leiningen.compile :only (eval-in-project)])
-  (:use [clojure.contrib.io :only [file delete-file-recursively]])
-  (:use [clojure.contrib.find-namespaces :only [find-namespaces-in-dir]]))
+  (:require [clojure.java.io :as io]
+            [leiningen.core.eval :as lein-eval]
+            [leiningen.clean :as lein-clean]
+            [clojure.tools.namespace.find :as ns-find]))
 
 (defn todo
   "Prints a summary of todos annotated using clj-todo.todo/todo.
@@ -12,16 +13,16 @@ also writes the log to the filename in :todo-log."
   [project & namespaces]
   (let [namespaces (if (seq namespaces)
 		     (map symbol namespaces)		     
-		     (find-namespaces-in-dir (file (:source-path project))))]
-    (delete-file-recursively (file (:compile-path project)) true)
-    (eval-in-project project
-		     `(do
-			(require '~'clj-todo)
-			(apply require '~namespaces)
-			(clj-todo/todo-summary)))
+		     (ns-find/find-namespaces-in-dir (io/file (:source-path project))))]
+    (lein-clean/delete-file-recursively (io/file (:compile-path project)) true)
+    (lein-eval/eval-in-project project
+                               `(do
+                                  (require '~'clj-todo)
+                                  (apply require '~namespaces)
+                                  (clj-todo/todo-summary)))
     (if (contains? project :todo-log) 
-      (eval-in-project project 
-		     `(do
-			(require '~'clj-todo)
-			(apply require '~namespaces)
-			(clj-todo/todo-summary-file ~(:todo-log project)))))))
+      (lein-eval/eval-in-project project 
+                                 `(do
+                                    (require '~'clj-todo)
+                                    (apply require '~namespaces)
+                                    (clj-todo/todo-summary-file ~(:todo-log project)))))))

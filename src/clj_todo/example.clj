@@ -1,14 +1,12 @@
 (ns clj-todo.example
-  (:use clj-todo))
+  (:require [clj-todo :refer [todo]]))
 
 (defn lousy-function
   [param-1 param-2]
   (do
     (println "doing one thing here")
-    (todo
-     "This part looks ugly"
-     (map param-1 (repeat param-2))
-     )
+    (todo "This part looks ugly"
+          (map param-1 (repeat param-2)))
     (println "a third thing here")))
 
 (todo
